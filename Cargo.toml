@@ -1,0 +1,21 @@
+[package]
+name = "likviz"
+version = "0.1.0"
+edition = "2021"
+description = "Uma ferramenta para visualizar a saída da ferramenta 'likwid-perfctr'."
+authors = ["Henrique Colini"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[profile.release]
+opt-level = 3
+
+[dependencies]
+chrono = "0.4.23"
+clap = { version = "4.1.4", features = ["derive"] }
+colored = "2.0.0"
+fancy-regex = "0.11.0"
+lazy_static = "1.4.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tempfile = "3.3.0"
