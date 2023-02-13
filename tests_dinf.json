@@ -1,0 +1,38 @@
+{
+    "target_path": "target/matmult",
+    "output_path": "output/",
+    "core": 3,
+    "sizes": {
+        "flag": "-n",
+        "values": [ 64, 100, 128, 1024, 2000, 2048, 3000, 4000, 5000 ]
+    },
+    "groups": [ "L3", "L2CACHE", "FLOPS_AVX" ],
+    "regions": [
+        { 
+            "label": "mat_mat",
+            "regions": [ "mat_mat", "mat_mat_opt" ]
+        },
+        {
+            "label": "mat_vec",
+            "regions": [ "mat_vec", "mat_vec_opt" ]
+        }
+    ],
+    "tables": [
+        {
+            "title": "Teste de Tempo",
+            "metrics": [ "Runtime (RDTSC) [s]" ]
+        },
+        {
+            "title": "Banda de Memória",
+            "metrics": [ "L3 bandwidth [MBytes/s]" ]
+        },
+        {
+            "title": "Cache Misses L2",
+            "metrics": [ "L2 miss ratio" ]
+        },
+        {
+            "title": "Operações Aritméticas",
+            "metrics": [ "Packed SP MFLOP/s", "Packed DP MFLOP/s" ]
+        }
+    ]
+}
