@@ -37,7 +37,7 @@ pub fn update_regset(regset: &mut RegionSet, regions: &HashMap<String, RegionMet
 
 pub struct TableColumn {
     title: String,
-    values: Vec<f64>,
+    values: Vec<String>,
 }
 
 pub struct Table {
@@ -52,7 +52,7 @@ pub fn create_table(
     regset: &RegionSet,
     regions: &Vec<String>,
     metrics: &Vec<String>,
-    n_values: &[u32],
+    x_axis: &[&str],
 ) -> Table {
     let mut table = Table {
         label: label.to_owned(),
@@ -62,7 +62,7 @@ pub fn create_table(
     let mut missing_metrics = HashSet::new();
     table.columns.push(TableColumn {
         title: "n".to_owned(),
-        values: n_values.iter().map(|x| *x as f64).collect(),
+        values: x_axis.iter().map(|x| x.to_string()).collect(),
     });
     for region in regions {
         let reg = regset.0.get(region);
@@ -74,7 +74,7 @@ pub fn create_table(
                 if let Some(values) = reg.0.get(metric) {
                     table.columns.push(TableColumn {
                         title: format!("{region} ({metric})"),
-                        values: values.to_owned(),
+                        values: values.iter().map(|x| x.to_string()).collect(),
                     });
                 } else {
                     log_wrn!("Métrica '{}' não encontrada", metric);
